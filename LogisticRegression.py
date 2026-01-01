@@ -45,3 +45,24 @@ y_pred = model.predict(X_test)
 # Display the predictions
 print("Predicted Outcomes (Pass/Fail):", y_pred)
 print("Actual Outcomes:", y_test.values)
+
+# Create a range of study hours for plotting
+study_hours_range = np.linspace(X.min(), X.max(), 100)
+
+# Calculate predicted probabilities using the sigmoid function
+y_prob = model.predict_proba(study_hours_range.reshape(-1, 1))[:, 1]
+
+# Plot the actual data points
+plt.scatter(X_test, y_test, color='blue', label='Actual Data')
+
+# Plot the logistic regression curve
+plt.plot(study_hours_range, y_prob, color='red', label='Logistic Regression Curve')
+
+# Add labels and title
+plt.xlabel('Study Hours')
+plt.ylabel('Probability of Passing')
+plt.title('Logistic Regression: Study Hours vs. Pass/Fail')
+plt.legend()
+
+# Show the plot
+plt.show()
